@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Event Registration Form</title>
+<style>
+.error { color: red; }
+</style>
+</head>
+<body>
+
+<h2>Event Registration Form</h2>
+<form id="registrationForm">
+    <div>
+        <label for="event-name">Event Name:</label>
+        <input type="text" id="event-name" name="event-name" value="Women Empowerment" required>
+    </div>
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required pattern="[A-Za-z ]+" title="Letters and spaces only" value="Women Empowerment">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required value="Godsway@gmail.com">
+    </div>
+    <div>
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required pattern="\(\d{3}\) \d{3}-\d{4}" title="Format: (123) 456-7890" value="0592464194">
+    </div>
+    <div>
+        <label for="date">Event Date:</label>
+        <input type="text" id="date" name="date" required pattern="^\d{2}/\d{2}/\d{4}$" title="Format: MM/DD/YYYY" value="07/01/2024">
+    </div>
+    <div>
+        <label for="tickets">Number of Tickets:</label>
+        <input type="number" id="tickets" name="tickets" required min="1" max="10" value="10">
+    </div>
+    <div>
+        <button type="submit">Register</button>
+    </div>
+</form>
+
+<script>
+document.getElementById('registrationForm').addEventListener('submit', function(event) {
+    var eventName = document.getElementById('event-name').value;
+    var name = document.getElementById('name').value;
+    var email = document.getElementById('email').value;
+    var phone = document.getElementById('phone').value;
+    var date = document.getElementById('date').value;
+    var tickets = document.getElementById('tickets').value;
+
+    // Validate event name
+    if (!eventName) {
+        alert('Event name is required.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate name
+    if (!/^[A-Za-z ]+$/.test(name)) {
+        alert('Invalid name. Please enter letters and spaces only.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate email
+    if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+        alert('Invalid email format.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate phone number
+    if (!/^\(\d{3}\) \d{3}-\d{4}$/.test(phone)) {
+        alert('Invalid phone number format. Please use (123) 456-7890.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate date
+    if (!/^\d{2}\/\d{2}\/\d{4}$/.test(date)) {
+        alert('Invalid date format. Please use MM/DD/YYYY.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate tickets
+    if (tickets < 1 || tickets > 10) {
+        alert('Number of tickets must be between 1 and 10.');
+        event.preventDefault();
+        return;
+    }
+});
+</script>
+
+</body>
+</html>
+
