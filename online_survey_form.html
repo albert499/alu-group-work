@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Online Survey Form</title>
+<style>
+.error { color: red; }
+</style>
+</head>
+<body>
+
+<h2>Online Survey Form</h2>
+<form id="surveyForm">
+    <div>
+        <label for="age">Age:</label>
+        <input type="number" id="age" name="age" required min="18" max="100" value="24">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required value="alice@gmail.com">
+    </div>
+    <div>
+        <label for="feedback">Feedback:</label>
+        <textarea id="feedback" name="feedback" required pattern="^[A-Za-z0-9\s]+$" title="No special characters">I enjoyed participating in this survey</textarea>
+    </div>
+    <div>
+        <label for="rating">Rating:</label>
+        <input type="number" id="rating" name="rating" required min="1" max="5" value="4">
+    </div>
+    <div>
+        <label for="survey-date">Survey Date:</label>
+        <input type="text" id="survey-date" name="survey-date" required pattern="\d{2}-\d{2}-\d{4}" title="Valid date in DD-MM-YYYY format" value="22-07-2024">
+    </div>
+    <div>
+        <button type="submit">Submit Survey</button>
+    </div>
+</form>
+
+<script>
+document.getElementById('surveyForm').addEventListener('submit', function(event) {
+    var age = document.getElementById('age').value;
+    var email = document.getElementById('email').value;
+    var feedback = document.getElementById('feedback').value;
+    var rating = document.getElementById('rating').value;
+    var surveyDate = document.getElementById('survey-date').value;
+
+    // Validate age
+    if (age < 18 || age > 100) {
+        alert('Invalid age. Please enter a number between 18 and 100.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate email
+    if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+        alert('Invalid email format.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate feedback
+    if (!/^[A-Za-z0-9\s]+$/.test(feedback)) {
+        alert('Invalid feedback. Please use only letters, numbers, and spaces.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate rating
+    if (rating < 1 || rating > 5) {
+        alert('Invalid rating. Please enter a number between 1 and 5.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate survey date
+    if (!/\d{2}-\d{2}-\d{4}/.test(surveyDate)) {
+        alert('Invalid survey date format. Please use DD-MM-YYYY.');
+        event.preventDefault();
+        return;
+    }
+});
+</script>
+
+</body>
+</html>
+

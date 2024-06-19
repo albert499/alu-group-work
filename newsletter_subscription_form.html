@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newsletter Subscription Form</title>
+<style>
+.error { color: red; }
+</style>
+</head>
+<body>
+
+<h2>Newsletter Subscription Form</h2>
+<form id="subscriptionForm">
+    <div>
+        <label for="first-name">First Name:</label>
+        <input type="text" id="first-name" name="first-name" required pattern="[A-Za-z]+" title="Letters only" value="Lucas">
+    </div>
+    <div>
+        <label for="last-name">Last Name:</label>
+        <input type="text" id="last-name" name="last-name" required pattern="[A-Za-z]+" title="Letters only" value="David">
+    </div>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required value="lucas@gmail.com">
+    </div>
+    <div>
+        <label>Subscription Preferences:</label><br>
+        <input type="checkbox" id="technology" name="preferences" value="Technology" checked>
+        <label for="technology">Technology</label><br>
+        <input type="checkbox" id="health" name="preferences" value="Health">
+        <label for="health">Health</label><br>
+        <input type="checkbox" id="finance" name="preferences" value="Finance">
+        <label for="finance">Finance</label>
+    </div>
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}" title="Minimum 8 characters, at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*)" value="Success@">
+    </div>
+    <div>
+        <button type="submit">Subscribe</button>
+    </div>
+</form>
+
+<script>
+document.getElementById('subscriptionForm').addEventListener('submit', function(event) {
+    var firstName = document.getElementById('first-name').value;
+    var lastName = document.getElementById('last-name').value;
+    var email = document.getElementById('email').value;
+    var password = document.getElementById('password').value;
+
+    // Validate first name
+    if (!/^[A-Za-z]+$/.test(firstName)) {
+        alert('Invalid first name. Please enter letters only.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate last name
+    if (!/^[A-Za-z]+$/.test(lastName)) {
+        alert('Invalid last name. Please enter letters only.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate email
+    if (!/^[\w-]+(?:\.[\w-]+)*@(?:[\w-]+\.)+[a-zA-Z]{2,7}$/.test(email)) {
+        alert('Invalid email format.');
+        event.preventDefault();
+        return;
+    }
+
+    // Validate password
+    if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}/.test(password)) {
+        alert('Invalid password. Password must be at least 8 characters long, contain at least one uppercase letter, one lowercase letter, one number, and one special character (!@#$%^&*).');
+        event.preventDefault();
+        return;
+    }
+});
+</script>
+
+</body>
+</html>
+
